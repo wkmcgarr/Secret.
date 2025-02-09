@@ -9,6 +9,7 @@
             text-align: center;
             font-family: Arial, sans-serif;
             background-color: pink;
+            overflow: hidden;
         }
         h1 {
             color: red;
@@ -34,25 +35,73 @@
             background-color: gray;
             color: white;
         }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: float 3s ease-in infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <h1>Will You Be My Valentine? ❤️</h1>
     <img src="valentine.jpg">
     <br><br>
-    <button class="yes-btn" onclick="startConfetti()">Yes</button>
+    <button class="yes-btn" id="yesBtn">Yes</button>
     <button class="no-btn" onclick="alert('Oh no! 💔')">No</button>
 
-    <!-- ✅ Correct CDN for confetti.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.9.3/confetti.min.js"></script>
-
     <script>
-        function startConfetti() {
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 }
-            });
+        document.getElementById("yesBtn").addEventListener("click", function() {
+            showFireworks();
+            generateHearts();
+        });
+
+        function showFireworks() {
+            let count = 50;
+            for (let i = 0; i < count; i++) {
+                let spark = document.createElement("div");
+                spark.style.position = "absolute";
+                spark.style.width = "5px";
+                spark.style.height = "5px";
+                spark.style.backgroundColor = getRandomColor();
+                spark.style.borderRadius = "50%";
+                spark.style.left = (50 + Math.random() * 40 - 20) + "vw";
+                spark.style.top = (50 + Math.random() * 40 - 20) + "vh";
+                document.body.appendChild(spark);
+                animateFirework(spark);
+            }
+        }
+
+        function animateFirework(spark) {
+            let scale = Math.random() * 2;
+            spark.animate([
+                { transform: `scale(1)`, opacity: 1 },
+                { transform: `scale(${scale})`, opacity: 0 }
+            ], { duration: 800, easing: "ease-out" });
+
+            setTimeout(() => spark.remove(), 800);
+        }
+
+        function getRandomColor() {
+            const colors = ["red", "yellow", "orange", "white", "pink"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function generateHearts() {
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 3000);
+            }
         }
     </script>
 </body>
