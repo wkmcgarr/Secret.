@@ -31,18 +31,27 @@
         button {
             font-size: 22px;
             padding: 15px 35px;
-            margin-top: 10px;
+            margin: 10px;
             border: none;
             border-radius: 15px;
             cursor: pointer;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .yes-btn {
             background: radial-gradient(circle, red, darkred);
             color: white;
             box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
         }
-        button:hover {
+        .no-btn {
+            background: linear-gradient(to right, #b3b3b3, #666);
+            color: white;
+        }
+        .yes-btn:hover {
             transform: scale(1.2);
             box-shadow: 0px 0px 30px rgba(255, 0, 0, 1);
+        }
+        .no-btn:hover {
+            transform: scale(1.1);
         }
         .heart {
             position: absolute;
@@ -61,11 +70,12 @@
 <body>
     <h1>Will You Be My Valentine? ❤️</h1>
     <img src="valentine.jpg" alt="Valentine Image">
-    <button id="yesBtn">Yes</button>
+    <button class="yes-btn" id="yesBtn">Yes</button>
+    <button class="no-btn" onclick="alert('Oh no! 💔')">No</button>
 
     <!-- ✅ Modern Romantic Song -->
     <audio id="bgMusic" loop>
-        <source src="https://www.chosic.com/wp-content/uploads/2022/02/Jordan-Schor---Home.mp3" type="audio/mp3">
+        <source src="https://cdn.pixabay.com/download/audio/2023/10/16/audio_b87c31f4eb.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -76,7 +86,7 @@
 
         function playMusic() {
             let music = document.getElementById("bgMusic");
-            music.volume = 0.6;
+            music.volume = 0.7;
             music.play();
         }
 
