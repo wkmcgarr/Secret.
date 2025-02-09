@@ -80,14 +80,20 @@
         <button class="no-btn" onclick="alert('Oh no! 💔')">No</button>
     </div>
 
-    <!-- ✅ Modern Romantic Song -->
+    <!-- ✅ Modern Romantic Background Music -->
     <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2023/10/16/audio_b87c31f4eb.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- ✅ Awww Sound Effect -->
+    <audio id="awwSound">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/31/audio_13a870cd0d.mp3" type="audio/mp3">
     </audio>
 
     <script>
         document.getElementById("yesBtn").addEventListener("click", function() {
             playMusic();
+            playAwwSound();
             generateHearts();
         });
 
@@ -95,6 +101,12 @@
             let music = document.getElementById("bgMusic");
             music.volume = 0.7;
             music.play().catch(error => console.log("Autoplay blocked: Click to enable music."));
+        }
+
+        function playAwwSound() {
+            let aww = document.getElementById("awwSound");
+            aww.volume = 1.0;
+            aww.play();
         }
 
         function generateHearts() {
